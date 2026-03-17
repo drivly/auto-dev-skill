@@ -60,6 +60,7 @@ Instead of reading API docs and crafting curl commands, just describe what you n
 - **"Find all Toyota RAV4s under $30k near Miami"** — searches listings with the right filters
 - **"Decode this VIN: JM3KKAHD5T1379650"** — calls VIN decode, returns structured data
 - **"Decode these VINs and enrich the CSV"** — batch decodes a CSV of VINs and adds year, make, model, trim, engine, drivetrain, and every other field
+- **"Validate all of these VINs to make sure they're real"** — checks VIN format, checksum, and decode status to flag invalid or fake VINs
 - **"Compare these two cars side by side"** — chains specs, payments, and TCO endpoints in parallel
 - **"Export all Honda Civics in Texas to CSV"** — paginates through results and saves to file
 - **"What's the monthly payment on this car with $10k down?"** — calculates financing with real rates
