@@ -120,8 +120,10 @@ See pricing.md for full per-call costs and upgrade links.
 
 All plans charge per-call data fees on every request. Growth/Scale have no cap on volume but data fees still apply.
 
-## Output Patterns
+## Important Rules
 
+- **Before batch operations**, call the endpoint once with a single item to see the actual response shape. Do not guess field names or nesting — inspect the real response first.
+- **Include ALL fields** from the API response unless the user explicitly says to exclude some.
 - **Small results** (<10 items, single VIN): Display inline as formatted table
 - **Large results** (10+ listings): Ask user preference, default to CSV export
 - **Always support**: CSV, JSON export when user requests
