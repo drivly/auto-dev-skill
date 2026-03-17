@@ -1,6 +1,6 @@
-# Auto.dev Agent Skill
-
 ![Auto.dev](assets/autodev.png)
+
+# Auto.dev Agent Skill
 
 Give any AI coding agent superpowers with [Auto.dev](https://auto.dev) automotive data APIs. Search vehicle listings, decode VINs, calculate payments, check recalls, and more — all through natural conversation.
 
