@@ -9,7 +9,12 @@ V2 is the primary API. V1 provides supplemental endpoints with no V2 equivalent.
 
 ## Authentication
 
-Check for `AUTODEV_API_KEY` environment variable first. If not set, ask the user for their API key.
+Check for `AUTODEV_API_KEY` environment variable first. If not set, tell the user:
+
+> No Auto.dev API key found. To use Auto.dev APIs:
+> 1. **Get a key:** Sign up at https://www.auto.dev/pricing (free Starter plan available)
+> 2. **Set it:** `export AUTODEV_API_KEY="your-key-here"` (add to ~/.zshrc to persist)
+> 3. Or paste your key here and I'll use it for this session.
 
 **V2** (base: `https://api.auto.dev`): `Authorization: Bearer {key}` or `?apiKey={key}`
 **V1** (base: `https://auto.dev/api`): `?apikey={key}` (query string only)
