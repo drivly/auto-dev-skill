@@ -3,9 +3,21 @@
 </p>
 
 <h1 align="center">Auto.dev Agent Skill</h1>
-Give any AI coding agent superpowers with <a href="https://auto.dev">Auto.dev</a> automotive data APIs. Search vehicle listings, decode VINs, calculate payments, check recalls, and more — all through natural conversation.
 
-Works with **Claude Code**, **Cursor**, **Codex**, **GitHub Copilot**, **Windsurf**, and [40+ other agents](https://github.com/vercel-labs/skills#supported-agents).
+<p align="center">
+  <a href="https://github.com/drivly/auto-dev-skill/blob/main/LICENSE"><img src="https://img.shields.io/github/license/drivly/auto-dev-skill" alt="License" /></a>
+  <a href="https://github.com/drivly/auto-dev-skill/stargazers"><img src="https://img.shields.io/github/stars/drivly/auto-dev-skill" alt="Stars" /></a>
+  <a href="https://github.com/drivly/auto-dev-skill/issues"><img src="https://img.shields.io/github/issues/drivly/auto-dev-skill" alt="Issues" /></a>
+  <a href="https://skills.sh/drivly/auto-dev-skill"><img src="https://img.shields.io/badge/skills.sh-auto--dev-blue" alt="Skills.sh" /></a>
+</p>
+
+<p align="center">
+Give any AI coding agent superpowers with <a href="https://auto.dev">Auto.dev</a> automotive data APIs. Search vehicle listings, decode VINs, calculate payments, check recalls, and more — all through natural conversation.
+</p>
+
+<p align="center">
+Works with <strong>Claude Code</strong>, <strong>Cursor</strong>, <strong>Codex</strong>, <strong>GitHub Copilot</strong>, <strong>Windsurf</strong>, and <a href="https://github.com/vercel-labs/skills#supported-agents">40+ other agents</a>.
+</p>
 
 ## Install
 
@@ -150,12 +162,24 @@ npx skills update
 npx skills remove auto-dev
 ```
 
+## Contributing
+
+We welcome contributions! Whether it's fixing an API field, adding a new workflow pattern, or supporting a new framework — see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
 ## Documentation
 
 - [Auto.dev API Docs](https://docs.auto.dev/)
 - [Auto.dev Pricing](https://www.auto.dev/pricing)
 - [Auto.dev Dashboard](https://auto.dev/dashboard)
+- [Skills CLI](https://github.com/vercel-labs/skills)
+- [Skills Directory](https://skills.sh)
 
 ## License
 
 MIT — see [LICENSE](LICENSE) for details.
+
+---
+
+<p align="center">
+  If this skill saves you time, <a href="https://github.com/drivly/auto-dev-skill">give it a star</a> — it helps other developers find it.
+</p>
