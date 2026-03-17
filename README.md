@@ -171,8 +171,6 @@ We welcome contributions! Whether it's fixing an API field, adding a new workflo
 - [Auto.dev API Docs](https://docs.auto.dev/)
 - [Auto.dev Pricing](https://www.auto.dev/pricing)
 - [Auto.dev Dashboard](https://auto.dev/dashboard)
-- [Skills CLI](https://github.com/vercel-labs/skills)
-- [Skills Directory](https://skills.sh)
 
 ## License
 
