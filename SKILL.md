@@ -14,6 +14,35 @@ Check for `AUTODEV_API_KEY` environment variable first. If not set, ask the user
 **V2** (base: `https://api.auto.dev`): `Authorization: Bearer {key}` or `?apiKey={key}`
 **V1** (base: `https://auto.dev/api`): `?apikey={key}` (query string only)
 
+## Listings API — Correct Usage
+
+The most common endpoint. Parameters use dot notation — do NOT use bare parameter names.
+
+**Correct:**
+```
+GET https://api.auto.dev/listings?vehicle.make=Audi&vehicle.model=R8&apiKey={key}
+```
+
+**Wrong (will return 400):**
+```
+make=Audi          ← wrong, use vehicle.make
+model=R8           ← wrong, use vehicle.model
+_order=asc         ← does not exist, no sort parameter
+sort=price         ← does not exist
+rows=50            ← does not exist, use limit
+```
+
+**Common filters:**
+```
+vehicle.make=Toyota          vehicle.model=Camry
+vehicle.year=2022-2024       vehicle.bodyStyle=SUV
+vehicle.drivetrain=AWD       retailListing.price=1-40000
+retailListing.state=FL       retailListing.miles=1-50000
+zip=33132&distance=50        limit=100&page=1
+```
+
+See v2-listings-api.md for all filters.
+
 ## V2 API — Quick Reference (Primary)
 
 | Endpoint | Plan | Use When |
