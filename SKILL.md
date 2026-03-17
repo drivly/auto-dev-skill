@@ -5,7 +5,7 @@ description: Use when working with Auto.dev APIs, vehicle data, VIN decoding, ca
 
 # Auto.dev API
 
-Comprehensive automotive data platform. V2 is the primary API. V1 provides supplemental endpoints with no V2 equivalent.
+V2 is the primary API. V1 provides supplemental endpoints with no V2 equivalent.
 
 ## Authentication
 
@@ -14,67 +14,100 @@ Check for `AUTODEV_API_KEY` environment variable first. If not set, ask the user
 **V2** (base: `https://api.auto.dev`): `Authorization: Bearer {key}` or `?apiKey={key}`
 **V1** (base: `https://auto.dev/api`): `?apikey={key}` (query string only)
 
-## Listings API — Correct Usage
+## API Reference — Copy These URLs
 
-The most common endpoint. Parameters use dot notation — do NOT use bare parameter names.
+Use these exact URL patterns. Do NOT guess parameter names — wrong params return 400.
 
-**Correct:**
+**Search Listings** (Starter)
 ```
-GET https://api.auto.dev/listings?vehicle.make=Audi&vehicle.model=R8&apiKey={key}
+GET https://api.auto.dev/listings?vehicle.make=Audi&vehicle.model=R8&retailListing.price=1-60000&retailListing.state=FL&limit=100&page=1&apiKey={key}
 ```
+More filters: `vehicle.year=2022-2024`, `vehicle.bodyStyle=SUV`, `vehicle.drivetrain=AWD`, `retailListing.miles=1-50000`, `zip=33132&distance=50`. See v2-listings-api.md for all filters.
 
-**Wrong (will return 400):**
+**Single Listing** (Starter)
 ```
-make=Audi          ← wrong, use vehicle.make
-model=R8           ← wrong, use vehicle.model
-_order=asc         ← does not exist, no sort parameter
-sort=price         ← does not exist
-rows=50            ← does not exist, use limit
+GET https://api.auto.dev/listings/{vin}?apiKey={key}
 ```
 
-**Common filters:**
+**VIN Decode** (Starter)
 ```
-vehicle.make=Toyota          vehicle.model=Camry
-vehicle.year=2022-2024       vehicle.bodyStyle=SUV
-vehicle.drivetrain=AWD       retailListing.price=1-40000
-retailListing.state=FL       retailListing.miles=1-50000
-zip=33132&distance=50        limit=100&page=1
+GET https://api.auto.dev/vin/{vin}?apiKey={key}
 ```
 
-See v2-listings-api.md for all filters.
+**Vehicle Photos** (Starter)
+```
+GET https://api.auto.dev/photos/{vin}?apiKey={key}
+```
 
-## V2 API — Quick Reference (Primary)
+**Specifications** (Growth)
+```
+GET https://api.auto.dev/specs/{vin}?apiKey={key}
+```
 
-| Endpoint | Plan | Use When |
-|----------|------|----------|
-| `GET /listings` | Starter | Search inventory by make/model/price/location |
-| `GET /listings/{vin}` | Starter | Get single listing by VIN |
-| `GET /vin/{vin}` | Starter | Decode VIN to make/model/trim/origin |
-| `GET /photos/{vin}` | Starter | Get vehicle photos |
-| `GET /specs/{vin}` | Growth | Full specs, colors, engine, dimensions |
-| `GET /build/{vin}` | Growth | Factory options, OEM colors, option MSRP |
-| `GET /recalls/{vin}` | Growth | All NHTSA recalls for a VIN |
-| `GET /tco/{vin}` | Growth | 5-year total cost of ownership |
-| `GET /payments/{vin}` | Growth | Monthly payment calculator |
-| `GET /apr/{vin}` | Growth | Interest rates by credit score/term |
-| `GET /openrecalls/{vin}` | Scale | Only unresolved recalls |
-| `GET /plate/{state}/{plate}` | Scale | License plate to VIN |
-| `GET /taxes/{vin}` | Scale | State/local taxes and fees |
+**OEM Build Data** (Growth — $0.10/call)
+```
+GET https://api.auto.dev/build/{vin}?apiKey={key}
+```
 
-## V1 API — Supplemental (No V2 Equivalent)
+**Vehicle Recalls** (Growth)
+```
+GET https://api.auto.dev/recalls/{vin}?apiKey={key}
+```
 
-| Endpoint | Use When |
-|----------|----------|
-| `GET /models` | List all available makes/models |
-| `GET /cities` | City data by state |
-| `GET /zip/{zip}` | ZIP to coordinates/city/DMA |
-| `GET /autosuggest/{term}` | Type-ahead for makes/models |
+**Total Cost of Ownership** (Growth)
+```
+GET https://api.auto.dev/tco/{vin}?zip=33132&apiKey={key}
+```
 
-Default to V2. Use V1 only for the 4 endpoints above that have no V2 equivalent.
+**Vehicle Payments** (Growth) — `price` and `zip` are required
+```
+GET https://api.auto.dev/payments/{vin}?price=39520&zip=33132&downPayment=5000&loanTerm=60&apiKey={key}
+```
+
+**Interest Rates** (Growth) — `year`, `make`, `model`, `zip`, `creditScore` are required
+```
+GET https://api.auto.dev/apr/{vin}?year=2024&make=Audi&model=R8&zip=33132&creditScore=720&apiKey={key}
+```
+
+**Open Recalls** (Scale)
+```
+GET https://api.auto.dev/openrecalls/{vin}?apiKey={key}
+```
+
+**Plate-to-VIN** (Scale — $0.55/call)
+```
+GET https://api.auto.dev/plate/{state}/{plate}?apiKey={key}
+```
+
+**Taxes & Fees** (Scale) — `price` and `zip` are required
+```
+GET https://api.auto.dev/taxes/{vin}?price=39520&zip=33132&apiKey={key}
+```
+
+### V1 Supplemental (No V2 Equivalent)
+
+```
+GET https://auto.dev/api/models?apikey={key}
+GET https://auto.dev/api/cities?apikey={key}
+GET https://auto.dev/api/zip/{zip}?apikey={key}
+GET https://auto.dev/api/autosuggest/{term}?apikey={key}
+```
+
+### Parameters That Do NOT Exist (Will Return 400)
+
+```
+make=          ← use vehicle.make
+model=         ← use vehicle.model
+_order=        ← no sort parameter exists
+sort=          ← no sort parameter exists
+rows=          ← use limit
+state=         ← use retailListing.state
+price=         ← use retailListing.price (on /listings), or price= (on /payments, /taxes)
+```
 
 ## Plans & Pricing
 
-See pricing.md for full per-call costs and upgrade links. Quick summary:
+See pricing.md for full per-call costs and upgrade links.
 
 | Plan | Monthly | Includes |
 |------|---------|----------|
@@ -82,7 +115,7 @@ See pricing.md for full per-call costs and upgrade links. Quick summary:
 | Growth | $299/mo + data fees | + Specs, Recalls, TCO, Payments, APR, Build |
 | Scale | $599/mo + data fees | + Open Recalls, Plate-to-VIN, Taxes & Fees |
 
-All plans charge per-call data fees on every request. Growth/Scale have no cap on volume (never throttled or blocked), but data fees still apply. Scale has lower per-call costs than Growth. See pricing.md for exact costs and upgrade links.
+All plans charge per-call data fees on every request. Growth/Scale have no cap on volume but data fees still apply.
 
 ## Output Patterns
 
