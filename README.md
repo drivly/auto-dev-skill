@@ -1,12 +1,9 @@
-<h1 align="center">Auto.dev Agent Skill</h1>
-
 <p align="center">
   <img src="assets/autodev.png" alt="Auto.dev" />
 </p>
 
-<p align="center">
-  Give any AI coding agent superpowers with <a href="https://auto.dev">Auto.dev</a> automotive data APIs. Search vehicle listings, decode VINs, calculate payments, check recalls, and more — all through natural conversation.
-</p>
+<h1 align="center">Auto.dev Agent Skill</h1>
+Give any AI coding agent superpowers with <a href="https://auto.dev">Auto.dev</a> automotive data APIs. Search vehicle listings, decode VINs, calculate payments, check recalls, and more — all through natural conversation.
 
 Works with **Claude Code**, **Cursor**, **Codex**, **GitHub Copilot**, **Windsurf**, and [40+ other agents](https://github.com/vercel-labs/skills#supported-agents).
 
@@ -158,8 +155,6 @@ npx skills remove auto-dev
 - [Auto.dev API Docs](https://docs.auto.dev/)
 - [Auto.dev Pricing](https://www.auto.dev/pricing)
 - [Auto.dev Dashboard](https://auto.dev/dashboard)
-- [Skills CLI](https://github.com/vercel-labs/skills)
-- [Skills Directory](https://skills.sh)
 
 ## License
 
