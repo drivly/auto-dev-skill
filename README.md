@@ -9,7 +9,7 @@
   <a href="https://github.com/drivly/auto-dev-skill/stargazers"><img src="https://img.shields.io/github/stars/drivly/auto-dev-skill" alt="Stars" /></a>
   <a href="https://github.com/drivly/auto-dev-skill/issues"><img src="https://img.shields.io/github/issues/drivly/auto-dev-skill" alt="Issues" /></a>
   <a href="https://skills.sh/drivly/auto-dev-skill/auto-dev"><img src="https://img.shields.io/badge/skills.sh-auto--dev-blue" alt="Skills.sh" /></a>
-  <a href="https://clawhub.ai/drivly/auto-dev-skill"><img src="https://img.shields.io/badge/clawhub-auto--dev-orange" alt="ClawHub" /></a>
+  <a href="https://clawhub.ai/bryant22/auto-dev"><img src="https://img.shields.io/badge/clawhub-auto--dev-orange" alt="ClawHub" /></a>
 </p>
 
 <p align="center">
