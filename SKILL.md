@@ -11,6 +11,7 @@ tags:
   - auto-dev
   - car-search
   - recalls
+homepage: https://github.com/drivly/auto-dev-skill
 metadata:
   openclaw:
     requires:
