@@ -1,6 +1,23 @@
 ---
 name: auto-dev
 description: Use when working with Auto.dev APIs, vehicle data, VIN decoding, car listings, vehicle photos, specs, recalls, payments, interest rates, taxes, OEM build data, plate-to-VIN, or any automotive data API calls
+version: 1.0.0
+tags:
+  - automotive
+  - vehicle-data
+  - vin
+  - listings
+  - api
+  - auto-dev
+  - car-search
+  - recalls
+metadata:
+  openclaw:
+    env:
+      AUTODEV_API_KEY:
+        description: Auto.dev API key. Get yours free at https://auto.dev/pricing
+        required: true
+        secret: true
 ---
 
 # Auto.dev API

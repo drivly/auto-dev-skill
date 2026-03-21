@@ -9,6 +9,7 @@
   <a href="https://github.com/drivly/auto-dev-skill/stargazers"><img src="https://img.shields.io/github/stars/drivly/auto-dev-skill" alt="Stars" /></a>
   <a href="https://github.com/drivly/auto-dev-skill/issues"><img src="https://img.shields.io/github/issues/drivly/auto-dev-skill" alt="Issues" /></a>
   <a href="https://skills.sh/drivly/auto-dev-skill/auto-dev"><img src="https://img.shields.io/badge/skills.sh-auto--dev-blue" alt="Skills.sh" /></a>
+  <a href="https://clawhub.ai/drivly/auto-dev"><img src="https://img.shields.io/badge/clawhub-auto--dev-orange" alt="ClawHub" /></a>
 </p>
 
 <p align="center">
@@ -16,7 +17,7 @@ Give any AI coding agent superpowers with <a href="https://auto.dev">Auto.dev</a
 </p>
 
 <p align="center">
-Works with <strong>Claude Code</strong>, <strong>Cursor</strong>, <strong>Codex</strong>, <strong>GitHub Copilot</strong>, <strong>Windsurf</strong>, and <a href="https://github.com/vercel-labs/skills#supported-agents">40+ other agents</a>.
+Works with <strong>Claude Code</strong>, <strong>Cursor</strong>, <strong>Codex</strong>, <strong>GitHub Copilot</strong>, <strong>Windsurf</strong>, <strong>OpenClaw</strong>, and <a href="https://github.com/vercel-labs/skills#supported-agents">40+ other agents</a>.
 </p>
 
 ## Install
@@ -26,6 +27,25 @@ npx skills add drivly/auto-dev-skill
 ```
 
 That's it. One command. The [skills CLI](https://github.com/vercel-labs/skills) handles installation for your agent automatically.
+
+### OpenClaw / ClawHub
+
+```
+clawhub install auto-dev
+```
+
+Or paste the URL directly into your OpenClaw chat and the agent handles the rest:
+
+```
+Install this skill: https://github.com/drivly/auto-dev-skill
+```
+
+Requires `AUTODEV_API_KEY` — OpenClaw will prompt you if it's not already set,
+or set it manually:
+
+```
+openclaw config set skills.entries.auto-dev.env.AUTODEV_API_KEY "sk_ad_your_key_here"
+```
 
 ### Options
 
@@ -162,6 +182,19 @@ npx skills update
 
 # Remove the skill
 npx skills remove auto-dev
+```
+
+**OpenClaw / ClawHub:**
+
+```
+# Check for updates
+clawhub update auto-dev
+
+# Remove the skill
+clawhub uninstall auto-dev
+
+# List all installed skills
+clawhub list
 ```
 
 ## Contributing
