@@ -13,11 +13,10 @@ tags:
   - recalls
 metadata:
   openclaw:
-    env:
-      AUTODEV_API_KEY:
-        description: Auto.dev API key. Get yours free at https://auto.dev/pricing
-        required: true
-        secret: true
+    requires:
+      env:
+        - AUTODEV_API_KEY
+    primaryEnv: AUTODEV_API_KEY
 ---
 
 # Auto.dev API
