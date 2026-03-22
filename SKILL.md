@@ -1,7 +1,7 @@
 ---
 name: auto-dev
 description: Use when working with Auto.dev APIs, vehicle data, VIN decoding, car listings, vehicle photos, specs, recalls, payments, interest rates, taxes, OEM build data, plate-to-VIN, or any automotive data API calls
-version: 1.0.1
+version: 1.0.2
 tags:
   - automotive
   - vehicle-data
