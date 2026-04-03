@@ -109,12 +109,12 @@ Use these only when MCP and CLI are unavailable.
 | `GET /specs/{vin}` | Growth | — |
 | `GET /build/{vin}` | Growth | — ($0.10/call) |
 | `GET /recalls/{vin}` | Growth | — |
-| `GET /tco/{vin}` | Growth | `zip` |
+| `GET /tco/{vin}` | Growth | — |
 | `GET /payments/{vin}` | Growth | `price`, `zip` |
 | `GET /apr/{vin}` | Growth | `year`, `make`, `model`, `zip`, `creditScore` |
 | `GET /openrecalls/{vin}` | Scale | — |
 | `GET /plate/{state}/{plate}` | Scale | — ($0.55/call) |
-| `GET /taxes/{vin}` | Scale | `price`, `zip` |
+| `GET /taxes/{vin}` | Scale | — |
 
 V1 supplemental (no V2 equivalent): `/api/models`, `/api/cities`, `/api/zip/{zip}`, `/api/autosuggest/{term}`
 
