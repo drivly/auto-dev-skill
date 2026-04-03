@@ -9,6 +9,7 @@
   <a href="https://github.com/drivly/auto-dev-skill/stargazers"><img src="https://img.shields.io/github/stars/drivly/auto-dev-skill" alt="Stars" /></a>
   <a href="https://github.com/drivly/auto-dev-skill/issues"><img src="https://img.shields.io/github/issues/drivly/auto-dev-skill" alt="Issues" /></a>
   <a href="https://skills.sh/drivly/auto-dev-skill/auto-dev"><img src="https://img.shields.io/badge/skills.sh-auto--dev-blue" alt="Skills.sh" /></a>
+  <a href="https://docs.auto.dev/v2/cli-mcp-sdk"><img src="https://img.shields.io/badge/docs-auto.dev-black" alt="Docs" /></a>
   <a href="https://clawhub.ai/bryant22/auto-dev"><img src="https://img.shields.io/badge/clawhub-auto--dev-orange" alt="ClawHub" /></a>
 </p>
 
@@ -22,35 +23,39 @@ Works with <strong>Claude Code</strong>, <strong>Cursor</strong>, <strong>Codex<
 
 ## Install
 
+### CLI + MCP + SDK (one command)
+
+```bash
+npm install -g @auto.dev/sdk
+```
+
+This gives you the `auto` CLI, the MCP server for AI agents, and the JS/TypeScript SDK.
+Full reference: [docs.auto.dev/v2/cli-mcp-sdk](https://docs.auto.dev/v2/cli-mcp-sdk)
+
+### Configure MCP for your AI tools
+
+```bash
+auto mcp install
+```
+
+Auto-configures the MCP server in Claude Code, Claude Desktop, and Cursor in one step.
+
+### Authenticate
+
+```bash
+auto login
+```
+
+OAuth login — no API key needed for CLI and MCP usage after this.
+
+### Coding agent skill (Claude Code, Cursor, Codex, Windsurf)
+
 ```bash
 npx skills add drivly/auto-dev-skill
 ```
 
-That's it. One command. The [skills CLI](https://github.com/vercel-labs/skills) handles installation for your agent automatically.
-
-### OpenClaw / ClawHub
-
-```
-clawhub install auto-dev
-```
-
-Or paste the URL directly into your OpenClaw chat and the agent handles the rest:
-
-```
-Install this skill: https://github.com/drivly/auto-dev-skill
-```
-
-Requires `AUTODEV_API_KEY` — OpenClaw will prompt you if it's not already set,
-or set it manually:
-
-```
-openclaw config set skills.entries.auto-dev.env.AUTODEV_API_KEY "sk_ad_your_key_here"
-```
-
-### Options
-
 ```bash
-# Install globally (available across all projects)
+# Install globally
 npx skills add drivly/auto-dev-skill -g
 
 # Install to a specific agent
@@ -58,20 +63,32 @@ npx skills add drivly/auto-dev-skill -a claude-code
 
 # Install to multiple agents
 npx skills add drivly/auto-dev-skill -a claude-code -a cursor -a codex
+```
 
-# Non-interactive (CI/CD friendly)
-npx skills add drivly/auto-dev-skill -g -a claude-code -y
+### OpenClaw / ClawHub
+
+```bash
+clawhub install auto-dev
+```
+
+Or paste the URL directly into your OpenClaw chat:
+
+```
+Install this skill: https://github.com/drivly/auto-dev-skill
 ```
 
 ### Set Your API Key
 
-Sign up at [auto.dev](https://auto.dev) and get your API key from the [dashboard](https://auto.dev/dashboard).
+If you're using the CLI or MCP after `auto login`, you don't need an API key.
+
+For direct API usage, sign up at [auto.dev](https://auto.dev) and get your key
+from the [dashboard](https://auto.dev/dashboard):
 
 ```bash
 export AUTODEV_API_KEY="sk_ad_your_key_here"
 ```
 
-Add this to your shell profile (`~/.zshrc`, `~/.bashrc`) to persist it. Or just paste your key when your agent asks — it works either way.
+Add this to your shell profile (`~/.zshrc`, `~/.bashrc`) to persist it.
 
 ## What It Does
 
@@ -173,28 +190,28 @@ If you hit an endpoint outside your plan, your agent will let you know what's ne
 
 ## Manage Your Skill
 
+**Coding agent skill:**
+
 ```bash
-# Check for updates
-npx skills check
-
-# Update to latest version
-npx skills update
-
-# Remove the skill
-npx skills remove auto-dev
+npx skills check          # check for updates
+npx skills update         # update to latest
+npx skills remove auto-dev  # remove
 ```
 
 **OpenClaw / ClawHub:**
 
+```bash
+clawhub update auto-dev   # update to latest
+clawhub uninstall auto-dev  # remove
+clawhub list              # list all installed skills
 ```
-# Check for updates
-clawhub update auto-dev
 
-# Remove the skill
-clawhub uninstall auto-dev
+**CLI / MCP / SDK:**
 
-# List all installed skills
-clawhub list
+```bash
+npm update -g @auto.dev/sdk  # update everything
+auto --version               # check current version
+auto mcp status              # check MCP server status
 ```
 
 ## Contributing

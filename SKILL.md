@@ -1,7 +1,7 @@
 ---
 name: auto-dev
-description: Use when working with Auto.dev APIs, vehicle data, VIN decoding, car listings, vehicle photos, specs, recalls, payments, interest rates, taxes, OEM build data, plate-to-VIN, or any automotive data API calls
-version: 1.0.2
+description: Use when working with Auto.dev APIs, vehicle data, VIN decoding, car listings, vehicle photos, specs, recalls, payments, interest rates, taxes, OEM build data, plate-to-VIN, CLI commands, MCP tools, or SDK methods for any automotive data task
+version: 1.1.0
 tags:
   - automotive
   - vehicle-data
@@ -11,119 +11,131 @@ tags:
   - auto-dev
   - car-search
   - recalls
+  - mcp
+  - sdk
+  - cli
 homepage: https://github.com/drivly/auto-dev-skill
 metadata:
   openclaw:
-    requires:
-      env:
-        - AUTODEV_API_KEY
-    primaryEnv: AUTODEV_API_KEY
+    env:
+      AUTODEV_API_KEY:
+        description: Optional — only needed for Direct API usage. CLI and MCP use OAuth via `auto login` instead.
+        required: false
+        secret: true
 ---
 
-# Auto.dev API
+# Auto.dev
 
-V2 is the primary API. V1 provides supplemental endpoints with no V2 equivalent.
+Automotive data for AI agents — via MCP tools, CLI commands, SDK methods, or direct API calls.
 
-## Authentication
+## Detect Your Surface
 
-Check for `AUTODEV_API_KEY` environment variable first. If not set, ask: "Do you have an Auto.dev API key?"
+Check in this order. Use the first one available:
 
-- **If yes:** Ask them to paste it or set it with `export AUTODEV_API_KEY="your-key-here"`
-- **If no:** Direct them to https://www.auto.dev/pricing to sign up (free Starter plan available)
+**1. MCP** — Check if `auto_decode` is in your available tools.
+If yes: use `auto_*` tools for everything. Do NOT make raw HTTP calls.
+
+**2. CLI** — Run `auto --version`.
+If installed: authenticate once with `auto login` (OAuth — no API key needed), then use `auto` commands.
+
+**3. SDK** — Check if `@auto.dev/sdk` is in project dependencies.
+If yes: use typed SDK methods. See code-patterns.md for all methods.
+
+**4. Direct API** — Check for `AUTODEV_API_KEY` env var.
+If not set: ask the user for it or direct them to https://auto.dev/pricing (free Starter plan).
+
+## MCP Tools
+
+If MCP tools are available, this is your only section. Use `auto_docs` to look up
+parameters and response shapes before calling an unfamiliar endpoint.
+
+```
+auto_docs listings      # see all listing filters
+auto_docs payments      # see payment params
+auto_docs vin-decode    # see VIN decode response shape
+```
+
+| Tool | Description | Plan |
+|------|-------------|------|
+| `auto_decode` | Decode a VIN | Starter |
+| `auto_listings` | Search listings with filters | Starter |
+| `auto_photos` | Get vehicle photos | Starter |
+| `auto_specs` | Vehicle specifications | Growth |
+| `auto_build` | OEM build data ($0.10/call) | Growth |
+| `auto_recalls` | Safety recalls | Growth |
+| `auto_payments` | Payment calculations | Growth |
+| `auto_apr` | Interest rates | Growth |
+| `auto_tco` | Total cost of ownership | Growth |
+| `auto_open_recalls` | Open/unresolved recalls | Scale |
+| `auto_plate` | Plate to VIN ($0.55/call) | Scale |
+| `auto_taxes` | Taxes and fees | Scale |
+| `auto_docs` | Search bundled API documentation | — |
+
+**If MCP tools are available, skip to Important Rules below.**
+
+## CLI Quick Reference
+
+Authenticate once: `auto login`
+
+```
+auto decode <vin>
+auto listings --make Toyota --year 2024 --price 10000-40000 --state CA
+auto payments <vin> --price 35000 --zip 90210 --down-payment 5000
+auto specs <vin>
+auto recalls <vin>
+auto plate <state> <plate>
+auto docs [query]        # search bundled docs
+auto explore [endpoint]  # browse params and mappings
+```
+
+All commands support `--json` for structured output.
+Full CLI reference: https://docs.auto.dev/v2/cli-mcp-sdk
+
+**If CLI is available, skip to Important Rules below.**
+
+## Direct API Quick Reference
+
+Use these only when MCP and CLI are unavailable.
 
 **V2** (base: `https://api.auto.dev`): `Authorization: Bearer {key}` or `?apiKey={key}`
 **V1** (base: `https://auto.dev/api`): `?apikey={key}` (query string only)
 
-## API Reference — Copy These URLs
+| Endpoint | Plan | Required Params |
+|----------|------|-----------------|
+| `GET /listings?filters` | Starter | See v2-listings-api.md |
+| `GET /listings/{vin}` | Starter | — |
+| `GET /vin/{vin}` | Starter | — |
+| `GET /photos/{vin}` | Starter | — |
+| `GET /specs/{vin}` | Growth | — |
+| `GET /build/{vin}` | Growth | — ($0.10/call) |
+| `GET /recalls/{vin}` | Growth | — |
+| `GET /tco/{vin}` | Growth | `zip` |
+| `GET /payments/{vin}` | Growth | `price`, `zip` |
+| `GET /apr/{vin}` | Growth | `year`, `make`, `model`, `zip`, `creditScore` |
+| `GET /openrecalls/{vin}` | Scale | — |
+| `GET /plate/{state}/{plate}` | Scale | — ($0.55/call) |
+| `GET /taxes/{vin}` | Scale | `price`, `zip` |
 
-Use these exact URL patterns. Do NOT guess parameter names — wrong params return 400.
+V1 supplemental (no V2 equivalent): `/api/models`, `/api/cities`, `/api/zip/{zip}`, `/api/autosuggest/{term}`
 
-**Search Listings** (Starter)
-```
-GET https://api.auto.dev/listings?vehicle.make=Audi&vehicle.model=R8&retailListing.price=1-60000&retailListing.state=FL&limit=100&page=1&apiKey={key}
-```
-More filters: `vehicle.year=2022-2024`, `vehicle.bodyStyle=SUV`, `vehicle.drivetrain=AWD`, `retailListing.miles=1-50000`, `zip=33132&distance=50`. See v2-listings-api.md for all filters.
+Before making any Direct API call, read the relevant reference file for full parameter names and examples.
+Full parameter reference: v2-listings-api.md | v2-vin-apis.md | v2-plate-api.md | v1-apis.md
 
-**Single Listing** (Starter)
-```
-GET https://api.auto.dev/listings/{vin}?apiKey={key}
-```
+### Common Gotchas (All Surfaces)
 
-**VIN Decode** (Starter)
-```
-GET https://api.auto.dev/vin/{vin}?apiKey={key}
-```
-
-**Vehicle Photos** (Starter)
-```
-GET https://api.auto.dev/photos/{vin}?apiKey={key}
-```
-
-**Specifications** (Growth)
-```
-GET https://api.auto.dev/specs/{vin}?apiKey={key}
-```
-
-**OEM Build Data** (Growth — $0.10/call)
-```
-GET https://api.auto.dev/build/{vin}?apiKey={key}
-```
-
-**Vehicle Recalls** (Growth)
-```
-GET https://api.auto.dev/recalls/{vin}?apiKey={key}
-```
-
-**Total Cost of Ownership** (Growth)
-```
-GET https://api.auto.dev/tco/{vin}?zip=33132&apiKey={key}
-```
-
-**Vehicle Payments** (Growth) — `price` and `zip` are required
-```
-GET https://api.auto.dev/payments/{vin}?price=39520&zip=33132&downPayment=5000&loanTerm=60&apiKey={key}
-```
-
-**Interest Rates** (Growth) — `year`, `make`, `model`, `zip`, `creditScore` are required
-```
-GET https://api.auto.dev/apr/{vin}?year=2024&make=Audi&model=R8&zip=33132&creditScore=720&apiKey={key}
-```
-
-**Open Recalls** (Scale)
-```
-GET https://api.auto.dev/openrecalls/{vin}?apiKey={key}
-```
-
-**Plate-to-VIN** (Scale — $0.55/call)
-```
-GET https://api.auto.dev/plate/{state}/{plate}?apiKey={key}
-```
-
-**Taxes & Fees** (Scale) — `price` and `zip` are required
-```
-GET https://api.auto.dev/taxes/{vin}?price=39520&zip=33132&apiKey={key}
-```
-
-### V1 Supplemental (No V2 Equivalent)
+These parameter names do NOT exist on the Direct API — agents hallucinate them frequently:
 
 ```
-GET https://auto.dev/api/models?apikey={key}
-GET https://auto.dev/api/cities?apikey={key}
-GET https://auto.dev/api/zip/{zip}?apikey={key}
-GET https://auto.dev/api/autosuggest/{term}?apikey={key}
+make=    ← use vehicle.make
+model=   ← use vehicle.model
+state=   ← use retailListing.state
+price=   ← use retailListing.price (on /listings), or price= (on /payments, /taxes)
+rows=    ← use limit
+sort=    ← no sort parameter exists
+_order=  ← no sort parameter exists
 ```
 
-### Parameters That Do NOT Exist (Will Return 400)
-
-```
-make=          ← use vehicle.make
-model=         ← use vehicle.model
-_order=        ← no sort parameter exists
-sort=          ← no sort parameter exists
-rows=          ← use limit
-state=         ← use retailListing.state
-price=         ← use retailListing.price (on /listings), or price= (on /payments, /taxes)
-```
+MCP and CLI handle these mappings automatically. This only matters for Direct API calls.
 
 ## Plans & Pricing
 
@@ -144,11 +156,17 @@ All plans charge per-call data fees on every request. Growth/Scale have no cap o
 - **Small results** (<10 items, single VIN): Display inline as formatted table
 - **Large results** (10+ listings): Ask user preference, default to CSV export
 - **Always support**: CSV, JSON export when user requests
-- **Chain APIs** when the query spans multiple endpoints
+- **Chain APIs** when the query spans multiple endpoints — MCP tools and CLI commands can be called in parallel
 
 ## Deep Reference
 
-**API Docs:** v2-listings-api.md | v2-vin-apis.md | v2-plate-api.md | v1-apis.md
-**Workflows:** chaining-patterns.md | interactive-explorer.md | business-workflows.md
-**Code Gen:** code-patterns.md | app-scaffolding.md | integration-recipes.md
-**Other:** error-recovery.md | pricing.md | examples.md
+**MCP or CLI:** use `auto_docs [query]` or `auto docs [query]` for live parameter lookup.
+Full reference: https://docs.auto.dev/v2/cli-mcp-sdk
+
+**SDK:** see code-patterns.md for typed methods and response format.
+
+**Direct API:**
+- API Docs: v2-listings-api.md | v2-vin-apis.md | v2-plate-api.md | v1-apis.md
+- Workflows: chaining-patterns.md | interactive-explorer.md | business-workflows.md
+- Code Gen: code-patterns.md | app-scaffolding.md | integration-recipes.md
+- Other: error-recovery.md | pricing.md | examples.md

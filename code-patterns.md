@@ -1,3 +1,81 @@
+## SDK (Recommended for JS/TS projects)
+
+Install:
+
+```bash
+npm install @auto.dev/sdk
+```
+
+Initialize:
+
+```typescript
+import { AutoDev } from '@auto.dev/sdk'
+
+const auto = new AutoDev({ apiKey: process.env.AUTODEV_API_KEY })
+```
+
+Core methods:
+
+```typescript
+// VIN decode
+const vehicle = await auto.decode('1HGCM82633A004352')
+
+// Search listings
+const listings = await auto.listings({
+  'vehicle.make': 'Toyota',
+  'vehicle.year': '2024',
+  'retailListing.price': '10000-40000',
+  'retailListing.state': 'FL',
+})
+
+// Payment calculation
+const payments = await auto.payments('1HGCM82633A004352', {
+  price: 35000,
+  zip: '90210',
+  downPayment: 5000,
+  loanTerm: 60,
+})
+
+// Interest rates
+const apr = await auto.apr('1HGCM82633A004352', {
+  year: 2024,
+  make: 'Honda',
+  model: 'Accord',
+  zip: '90210',
+  creditScore: '750',
+})
+
+// Total cost of ownership
+const tco = await auto.tco('1HGCM82633A004352', { zip: '90210' })
+
+// Plate to VIN
+const plate = await auto.plate('CA', 'ABC1234')
+
+// Taxes and fees
+const taxes = await auto.taxes('1HGCM82633A004352', { price: 35000, zip: '90210' })
+
+// Account usage
+const usage = await auto.usage()
+```
+
+All methods return:
+
+```typescript
+{
+  data: T,
+  meta: {
+    requestId: string,
+    tier: string,
+    usage?: { remaining: number }
+  }
+}
+```
+
+Use the SDK for all new JS/TS projects. Fall back to raw fetch only when
+the SDK is unavailable or the user is using a non-JS environment.
+
+---
+
 # Code Patterns
 
 Framework-specific patterns for integrating Auto.dev APIs. When a developer asks to build something, generate complete, working code using these patterns — not pseudocode.
