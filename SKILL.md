@@ -73,6 +73,10 @@ auto_docs vin-decode    # see VIN decode response shape
 | `auto_plate` | Plate to VIN ($0.55/call) | Scale |
 | `auto_taxes` | Taxes and fees | Scale |
 | `auto_docs` | Search bundled API documentation | — |
+| `auto_config_set` | Set a config value (e.g. `raw: true`) | — |
+| `auto_config_get` | Get a config value or list all settings | — |
+
+API metadata is stripped from MCP tool responses by default. Use `auto_config_set` with `key: "raw"` and `value: "true"` to get full responses.
 
 **If MCP tools are available, skip to Important Rules below.**
 
@@ -99,7 +103,15 @@ auto docs [query]        # search bundled docs
 auto explore [endpoint]  # browse params and mappings
 ```
 
-All commands support `--json`, `--yaml`, and `--api-key <key>` flags.
+All commands support `--json`, `--yaml`, `--raw`, and `--api-key <key>` flags.
+
+API metadata is stripped by default — you get clean vehicle data. Use `--raw` to see the full API response.
+
+```
+auto config set raw true    # always show full responses
+auto config get raw         # check current value
+auto config list            # show all settings
+```
 Full CLI reference: https://docs.auto.dev/v2/cli-mcp-sdk
 
 **If CLI is available, skip to Important Rules below.**
