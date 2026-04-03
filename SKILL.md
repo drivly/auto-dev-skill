@@ -1,7 +1,7 @@
 ---
 name: auto-dev
 description: Use when working with Auto.dev APIs, vehicle data, VIN decoding, car listings, vehicle photos, specs, recalls, payments, interest rates, taxes, OEM build data, plate-to-VIN, CLI commands, MCP tools, or SDK methods for any automotive data task
-version: 1.1.1
+version: 1.1.2
 tags:
   - automotive
   - vehicle-data
