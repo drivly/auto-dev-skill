@@ -79,11 +79,18 @@ Authenticate once: `auto login`
 
 ```
 auto decode <vin>
+auto photos <vin>
 auto listings --make Toyota --year 2024 --price 10000-40000 --state CA
-auto payments <vin> --price 35000 --zip 90210 --down-payment 5000
 auto specs <vin>
+auto build <vin>
 auto recalls <vin>
+auto open-recalls <vin>
+auto payments <vin> --price 35000 --zip 90210 --down-payment 5000
+auto apr <vin> --year 2024 --make Honda --model Accord --zip 90210 --credit-score 750
+auto tco <vin> --zip 90210
+auto taxes <vin> --price 35000 --zip 90210
 auto plate <state> <plate>
+auto usage
 auto docs [query]        # search bundled docs
 auto explore [endpoint]  # browse params and mappings
 ```
