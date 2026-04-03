@@ -34,12 +34,15 @@ Check in this order. Use the first one available:
 
 **1. MCP** — Check if `auto_decode` is in your available tools.
 If yes: use `auto_*` tools for everything. Do NOT make raw HTTP calls.
+To install: `npx @auto.dev/sdk mcp install` (installs globally and configures Claude Code, Claude Desktop, Cursor).
 
 **2. CLI** — Run `auto --version`.
 If installed: authenticate once with `auto login` (OAuth — no API key needed), then use `auto` commands.
+To install: `npm install -g @auto.dev/sdk` or use `npx @auto.dev/sdk <command>` without installing.
 
 **3. SDK** — Check if `@auto.dev/sdk` is in project dependencies.
 If yes: use typed SDK methods. See code-patterns.md for all methods.
+To install: `npm install @auto.dev/sdk`
 
 **4. Direct API** — Check for `AUTODEV_API_KEY` env var.
 If not set: ask the user for it or direct them to https://auto.dev/pricing (free Starter plan).
@@ -75,6 +78,7 @@ auto_docs vin-decode    # see VIN decode response shape
 
 ## CLI Quick Reference
 
+Install: `npm install -g @auto.dev/sdk` (or use `npx @auto.dev/sdk` without installing)
 Authenticate once: `auto login`
 
 ```
@@ -95,7 +99,7 @@ auto docs [query]        # search bundled docs
 auto explore [endpoint]  # browse params and mappings
 ```
 
-All commands support `--json` for structured output.
+All commands support `--json`, `--yaml`, and `--api-key <key>` flags.
 Full CLI reference: https://docs.auto.dev/v2/cli-mcp-sdk
 
 **If CLI is available, skip to Important Rules below.**
