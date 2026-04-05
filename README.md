@@ -11,6 +11,7 @@
   <a href="https://skills.sh/drivly/auto-dev-skill/auto-dev"><img src="https://img.shields.io/badge/skills.sh-auto--dev-blue" alt="Skills.sh" /></a>
   <a href="https://docs.auto.dev/v2/cli-mcp-sdk"><img src="https://img.shields.io/badge/docs-auto.dev-black" alt="Docs" /></a>
   <a href="https://clawhub.ai/bryant22/auto-dev"><img src="https://img.shields.io/badge/clawhub-auto--dev-orange" alt="ClawHub" /></a>
+  <a href="https://glama.ai/mcp/servers/drivly/auto-dev-skill"><img src="https://glama.ai/mcp/servers/drivly/auto-dev-skill/badges/score.svg" alt="Glama Score" /></a>
 </p>
 
 <p align="center">
