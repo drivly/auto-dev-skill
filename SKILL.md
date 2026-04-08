@@ -34,7 +34,7 @@ Check in this order. Use the first one available:
 
 **1. MCP** — Check if `auto_decode` is in your available tools.
 If yes: use `auto_*` tools for everything. Do NOT make raw HTTP calls.
-To install: `npx @auto.dev/sdk mcp install` (installs globally and configures Claude Code, Claude Desktop, Cursor).
+To install: `npx @auto.dev/sdk mcp install` (installs globally and configures Claude Code, Claude Desktop, Cursor, Windsurf, VS Code Copilot, Cline, Zed).
 
 **2. CLI** — Run `auto --version`.
 If installed: authenticate once with `auto login` (OAuth — no API key needed), then use `auto` commands.
