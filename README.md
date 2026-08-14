@@ -139,7 +139,7 @@ The skill handles authentication, pagination, error handling, cost estimation, a
 
 | Plan | Monthly | Annual | Rate Limit | What You Get |
 |------|---------|--------|------------|--------------|
-| **Free** | $0, no card | — | 5 req/s | VIN Decode, Listings, Photos (1,000 calls/mo, hard cap) |
+| **Free** | $0, no card | — | 5 req/s | VIN Decode, Listings (1,000 calls/mo, hard cap) |
 | **Starter** | $99/mo + data fees | — | 5 req/s | VIN Decode, Listings, Photos (1,000 calls/mo included, then usage-based) |
 | **Growth** | $299/mo + data fees | $249/mo | 10 req/s | + Specs, Recalls, TCO, Payments, APR, Build |
 | **Scale** | $599/mo + data fees | $499/mo | 50 req/s | + Open Recalls, Plate-to-VIN, Taxes & Fees |

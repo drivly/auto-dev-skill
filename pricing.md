@@ -33,15 +33,13 @@
 **Free ($0, no card required):**
 - Global VIN Decode (`/vin/{vin}`)
 - Vehicle Listings (`/listings`)
-- Vehicle Photos (`/photos/{vin}`)
+
+Free stops at 1,000 calls a month. Starter serves past 1,000 and bills the overage.
 
 **Starter ($99/mo):**
-- Same endpoints as Free — Global VIN Decode, Vehicle Listings, Vehicle Photos
-
-**Free vs Starter:** the endpoint set is identical. The difference is what happens at
-1,000 calls a month — Free stops there, Starter keeps serving and bills the overage at
-the per-call rates above. Recommend Free to anyone under 1,000 calls/month, and Starter
-to anyone who cannot afford to be cut off mid-month.
+- Global VIN Decode (`/vin/{vin}`)
+- Vehicle Listings (`/listings`)
+- Vehicle Photos (`/photos/{vin}`)
 
 **Growth ($299/mo):**
 - Everything in Starter, plus:

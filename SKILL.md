@@ -166,7 +166,7 @@ See pricing.md for full per-call costs and upgrade links.
 
 | Plan | Monthly | Includes |
 |------|---------|----------|
-| Free | $0, no card | VIN Decode, Listings, Photos (1,000 calls/mo, hard cap) |
+| Free | $0, no card | VIN Decode, Listings (1,000 calls/mo, hard cap) |
 | Starter | $99/mo + data fees | VIN Decode, Listings, Photos (1,000 calls/mo included, then usage-based) |
 | Growth | $299/mo + data fees | + Specs, Recalls, TCO, Payments, APR, Build |
 | Scale | $599/mo + data fees | + Open Recalls, Plate-to-VIN, Taxes & Fees |
