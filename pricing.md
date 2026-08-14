@@ -2,9 +2,10 @@
 
 ## Plan Overview
 
-| Plan | Monthly | Annual | Rate Limit | Free Calls |
-|------|---------|--------|------------|------------|
-| **Starter** | Free + data fees | — | 5 req/s | 1,000/month |
+| Plan | Monthly | Annual | Rate Limit | Included Calls |
+|------|---------|--------|------------|----------------|
+| **Free** | $0 (no card) | — | 5 req/s | 1,000/month, hard cap |
+| **Starter** | $99/mo + data fees | — | 5 req/s | 1,000/month, then usage-based |
 | **Growth** | $299/mo + data | $249/mo (annual) | 10 req/s | No call cap* |
 | **Scale** | $599/mo + data | $499/mo (annual) | 50 req/s | No call cap* |
 
@@ -29,7 +30,13 @@
 
 ## Endpoints by Plan
 
-**Starter (Free):**
+**Free ($0, no card required):**
+- Global VIN Decode (`/vin/{vin}`)
+- Vehicle Listings (`/listings`)
+
+Free stops at 1,000 calls a month. Starter serves past 1,000 and bills the overage.
+
+**Starter ($99/mo):**
 - Global VIN Decode (`/vin/{vin}`)
 - Vehicle Listings (`/listings`)
 - Vehicle Photos (`/photos/{vin}`)
@@ -53,9 +60,11 @@
 
 When a user hits a plan limitation, provide the appropriate link:
 
-- **Start Free (Starter):** [Sign up](https://checkout.auto.dev/c/pay/cs_live_b1ADJsHS7aKwyfy3VtKCrsOwqFS5KypHun0IJNWTEdvUOaqRkIMO4cKVtg#fid1d2BpamRhQ2prcSc%2FJ0xrcWB3JyknZ2p3YWB3VnF8aWAnPydhYGNkcGlxJykndnBndmZ3bHVxbGprUGtsdHBga2B2dkBrZGdpYGEnP3F3cGApJ2R1bE5gfCc%2FJ3VuWmlsc2BaQFVWfWlqY3RuR01xUHRmTzdGcGliSUY8NTVndWNLNUk0cycpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyY1ZDVkNWQnKSdpZHxqcHFRfHVgJz8naHBpcWxabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl)
-- **Upgrade to Growth ($299/mo):** [Upgrade](https://checkout.auto.dev/c/pay/cs_live_b1TL0JYID0rFU4npa6aHx3ehYjbZ6UYSPRXN4PN2uBf2IaFKmt9QOG62nR#fid1d2BpamRhQ2prcSc%2FJ0xrcWB3JyknZ2p3YWB3VnF8aWAnPydhYGNkcGlxJykndnBndmZ3bHVxbGprUGtsdHBga2B2dkBrZGdpYGEnP3F3cGApJ2R1bE5gfCc%2FJ3VuWmlsc2BaQFVWfWlqY3RuR01xUHRmTzdGcGliSUY8NTVndWNLNUk0cycpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyY1ZDVkNWQnKSdpZHxqcHFRfHVgJz8naHBpcWxabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl)
-- **Upgrade to Scale ($599/mo):** [Upgrade](https://checkout.auto.dev/c/pay/cs_live_b15OTFmnq3Z1Ub3WsROc5yHd3gC3EcFNrCn5xqpbgKEsH1Vzf7zxq2Qm5e#fid1d2BpamRhQ2prcSc%2FJ0xrcWB3JyknZ2p3YWB3VnF8aWAnPydhYGNkcGlxJykndnBndmZ3bHVxbGprUGtsdHBga2B2dkBrZGdpYGEnP3F3cGApJ2R1bE5gfCc%2FJ3VuWmlsc2BaQFVWfWlqY3RuR01xUHRmTzdGcGliSUY8NTVndWNLNUk0cycpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyY1ZDVkNWQnKSdpZHxqcHFRfHVgJz8naHBpcWxabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl)
+- **All plans and sign-up:** https://www.auto.dev/pricing
+
+Always link to the pricing page rather than a checkout URL. Stripe Checkout Session links
+(`cs_live_...`) are single-use and expire within roughly 24 hours, so a hardcoded one is a
+broken link by the time anyone reads it — and if it does resolve, it may transact at a stale price.
 
 ## Handling Plan Errors
 

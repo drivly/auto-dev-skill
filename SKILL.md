@@ -45,7 +45,7 @@ If yes: use typed SDK methods. See code-patterns.md for all methods.
 To install: `npm install @auto.dev/sdk`
 
 **4. Direct API** — Check for `AUTODEV_API_KEY` env var.
-If not set: ask the user for it or direct them to https://auto.dev/pricing (free Starter plan).
+If not set: ask the user for it or direct them to https://auto.dev/pricing (the Free plan needs no card).
 
 ## MCP Tools
 
@@ -166,7 +166,8 @@ See pricing.md for full per-call costs and upgrade links.
 
 | Plan | Monthly | Includes |
 |------|---------|----------|
-| Starter | Free + data fees | VIN Decode, Listings, Photos (1,000 free calls/mo) |
+| Free | $0, no card | VIN Decode, Listings (1,000 calls/mo, hard cap) |
+| Starter | $99/mo + data fees | VIN Decode, Listings, Photos (1,000 calls/mo included, then usage-based) |
 | Growth | $299/mo + data fees | + Specs, Recalls, TCO, Payments, APR, Build |
 | Scale | $599/mo + data fees | + Open Recalls, Plate-to-VIN, Taxes & Fees |
 
