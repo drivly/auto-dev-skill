@@ -5,7 +5,6 @@
 | Plan | Monthly | Annual | Rate Limit | Included Calls |
 |------|---------|--------|------------|----------------|
 | **Free** | $0 (no card) | — | 5 req/s | 1,000/month, hard cap |
-| **Starter** | $99/mo + data fees | — | 5 req/s | 1,000/month, then usage-based |
 | **Growth** | $299/mo + data | $249/mo (annual) | 10 req/s | No call cap* |
 | **Scale** | $599/mo + data | $499/mo (annual) | 50 req/s | No call cap* |
 
@@ -13,36 +12,34 @@
 
 ## Per-Call Data Costs
 
-| Endpoint | Starter | Growth | Scale |
-|----------|---------|--------|-------|
-| Global VIN Decode | $0.004 | $0.0025 | $0.0015 |
-| Vehicle Listings | $0.002 | $0.0015 | $0.001 |
-| Vehicle Photos | $0.001 | $0.0009 | $0.0007 |
-| Specifications | — | $0.0015 | $0.001 |
-| Vehicle Recalls | — | $0.01 | $0.007 |
-| Total Cost of Ownership | — | $0.06 | $0.04 |
-| Vehicle Payments | — | $0.005 | $0.004 |
-| Interest Rates | — | $0.005 | $0.004 |
-| OEM Build Data | — | $0.10 | $0.08 |
-| Open Recalls | — | — | $0.06 |
-| Plate-to-VIN | — | — | $0.55 |
-| Taxes & Fees | — | — | $0.005 |
+| Endpoint | Growth | Scale |
+|----------|--------|-------|
+| Global VIN Decode | $0.0025 | $0.0015 |
+| Vehicle Listings | $0.0015 | $0.001 |
+| Vehicle Photos | $0.0009 | $0.0007 |
+| Specifications | $0.0015 | $0.001 |
+| Vehicle Recalls | $0.01 | $0.007 |
+| Total Cost of Ownership | $0.06 | $0.04 |
+| Vehicle Payments | $0.005 | $0.004 |
+| Interest Rates | $0.005 | $0.004 |
+| OEM Build Data | $0.10 | $0.08 |
+| Open Recalls | — | $0.06 |
+| Plate-to-VIN | — | $0.55 |
+| Taxes & Fees | — | $0.005 |
+
+Free incurs no data costs — it is capped at 1,000 calls rather than metered.
 
 ## Endpoints by Plan
 
 **Free ($0, no card required):**
 - Global VIN Decode (`/vin/{vin}`)
 - Vehicle Listings (`/listings`)
-
-Free stops at 1,000 calls a month. Starter serves past 1,000 and bills the overage.
-
-**Starter ($99/mo):**
-- Global VIN Decode (`/vin/{vin}`)
-- Vehicle Listings (`/listings`)
 - Vehicle Photos (`/photos/{vin}`)
 
+Free is a hard cap: requests stop at 1,000 a month. Upgrade to Growth for uncapped volume.
+
 **Growth ($299/mo):**
-- Everything in Starter, plus:
+- Everything in Free, plus:
 - Specifications (`/specs/{vin}`)
 - Vehicle Recalls (`/recalls/{vin}`)
 - Total Cost of Ownership (`/tco/{vin}`)
