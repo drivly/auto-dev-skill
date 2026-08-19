@@ -2,9 +2,9 @@
 
 ## Plan Overview
 
-| Plan | Monthly | Annual | Rate Limit | Free Calls |
-|------|---------|--------|------------|------------|
-| **Starter** | Free + data fees | — | 5 req/s | 1,000/month |
+| Plan | Monthly | Annual | Rate Limit | Included Calls |
+|------|---------|--------|------------|----------------|
+| **Free** | $0 (no card) | — | 5 req/s | 1,000/month, hard cap |
 | **Growth** | $299/mo + data | $249/mo (annual) | 10 req/s | No call cap* |
 | **Scale** | $599/mo + data | $499/mo (annual) | 50 req/s | No call cap* |
 
@@ -12,30 +12,34 @@
 
 ## Per-Call Data Costs
 
-| Endpoint | Starter | Growth | Scale |
-|----------|---------|--------|-------|
-| Global VIN Decode | $0.004 | $0.0025 | $0.0015 |
-| Vehicle Listings | $0.002 | $0.0015 | $0.001 |
-| Vehicle Photos | $0.001 | $0.0009 | $0.0007 |
-| Specifications | — | $0.0015 | $0.001 |
-| Vehicle Recalls | — | $0.01 | $0.007 |
-| Total Cost of Ownership | — | $0.06 | $0.04 |
-| Vehicle Payments | — | $0.005 | $0.004 |
-| Interest Rates | — | $0.005 | $0.004 |
-| OEM Build Data | — | $0.10 | $0.08 |
-| Open Recalls | — | — | $0.06 |
-| Plate-to-VIN | — | — | $0.55 |
-| Taxes & Fees | — | — | $0.005 |
+| Endpoint | Growth | Scale |
+|----------|--------|-------|
+| Global VIN Decode | $0.0025 | $0.0015 |
+| Vehicle Listings | $0.0015 | $0.001 |
+| Vehicle Photos | $0.0009 | $0.0007 |
+| Specifications | $0.0015 | $0.001 |
+| Vehicle Recalls | $0.01 | $0.007 |
+| Total Cost of Ownership | $0.06 | $0.04 |
+| Vehicle Payments | $0.005 | $0.004 |
+| Interest Rates | $0.005 | $0.004 |
+| OEM Build Data | $0.10 | $0.08 |
+| Open Recalls | — | $0.06 |
+| Plate-to-VIN | — | $0.55 |
+| Taxes & Fees | — | $0.005 |
+
+Free incurs no data costs — it is capped at 1,000 calls rather than metered.
 
 ## Endpoints by Plan
 
-**Starter (Free):**
+**Free ($0, no card required):**
 - Global VIN Decode (`/vin/{vin}`)
 - Vehicle Listings (`/listings`)
 - Vehicle Photos (`/photos/{vin}`)
 
+Free is a hard cap: requests stop at 1,000 a month. Upgrade to Growth for uncapped volume.
+
 **Growth ($299/mo):**
-- Everything in Starter, plus:
+- Everything in Free, plus:
 - Specifications (`/specs/{vin}`)
 - Vehicle Recalls (`/recalls/{vin}`)
 - Total Cost of Ownership (`/tco/{vin}`)
@@ -53,9 +57,11 @@
 
 When a user hits a plan limitation, provide the appropriate link:
 
-- **Start Free (Starter):** [Sign up](https://checkout.auto.dev/c/pay/cs_live_b1ADJsHS7aKwyfy3VtKCrsOwqFS5KypHun0IJNWTEdvUOaqRkIMO4cKVtg#fid1d2BpamRhQ2prcSc%2FJ0xrcWB3JyknZ2p3YWB3VnF8aWAnPydhYGNkcGlxJykndnBndmZ3bHVxbGprUGtsdHBga2B2dkBrZGdpYGEnP3F3cGApJ2R1bE5gfCc%2FJ3VuWmlsc2BaQFVWfWlqY3RuR01xUHRmTzdGcGliSUY8NTVndWNLNUk0cycpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyY1ZDVkNWQnKSdpZHxqcHFRfHVgJz8naHBpcWxabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl)
-- **Upgrade to Growth ($299/mo):** [Upgrade](https://checkout.auto.dev/c/pay/cs_live_b1TL0JYID0rFU4npa6aHx3ehYjbZ6UYSPRXN4PN2uBf2IaFKmt9QOG62nR#fid1d2BpamRhQ2prcSc%2FJ0xrcWB3JyknZ2p3YWB3VnF8aWAnPydhYGNkcGlxJykndnBndmZ3bHVxbGprUGtsdHBga2B2dkBrZGdpYGEnP3F3cGApJ2R1bE5gfCc%2FJ3VuWmlsc2BaQFVWfWlqY3RuR01xUHRmTzdGcGliSUY8NTVndWNLNUk0cycpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyY1ZDVkNWQnKSdpZHxqcHFRfHVgJz8naHBpcWxabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl)
-- **Upgrade to Scale ($599/mo):** [Upgrade](https://checkout.auto.dev/c/pay/cs_live_b15OTFmnq3Z1Ub3WsROc5yHd3gC3EcFNrCn5xqpbgKEsH1Vzf7zxq2Qm5e#fid1d2BpamRhQ2prcSc%2FJ0xrcWB3JyknZ2p3YWB3VnF8aWAnPydhYGNkcGlxJykndnBndmZ3bHVxbGprUGtsdHBga2B2dkBrZGdpYGEnP3F3cGApJ2R1bE5gfCc%2FJ3VuWmlsc2BaQFVWfWlqY3RuR01xUHRmTzdGcGliSUY8NTVndWNLNUk0cycpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyY1ZDVkNWQnKSdpZHxqcHFRfHVgJz8naHBpcWxabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl)
+- **All plans and sign-up:** https://www.auto.dev/pricing
+
+Always link to the pricing page rather than a checkout URL. Stripe Checkout Session links
+(`cs_live_...`) are single-use and expire within roughly 24 hours, so a hardcoded one is a
+broken link by the time anyone reads it — and if it does resolve, it may transact at a stale price.
 
 ## Handling Plan Errors
 

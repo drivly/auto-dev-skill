@@ -113,9 +113,9 @@ The skill handles authentication, pagination, error handling, cost estimation, a
 
 | Endpoint | Plan | Description |
 |----------|------|-------------|
-| Vehicle Listings | Starter | Search millions of active listings |
-| VIN Decode | Starter | Decode any VIN to vehicle data |
-| Vehicle Photos | Starter | High-quality vehicle images |
+| Vehicle Listings | Free | Search millions of active listings |
+| VIN Decode | Free | Decode any VIN to vehicle data |
+| Vehicle Photos | Free | High-quality vehicle images |
 | Specifications | Growth | Full technical specs and features |
 | OEM Build Data | Growth | Factory options, colors, MSRP |
 | Vehicle Recalls | Growth | NHTSA recall history |
@@ -139,7 +139,7 @@ The skill handles authentication, pagination, error handling, cost estimation, a
 
 | Plan | Monthly | Annual | Rate Limit | What You Get |
 |------|---------|--------|------------|--------------|
-| **Starter** | Free + data fees | — | 5 req/s | VIN Decode, Listings, Photos (1,000 free calls/mo) |
+| **Free** | $0, no card | — | 5 req/s | VIN Decode, Listings, Photos (1,000 calls/mo, hard cap) |
 | **Growth** | $299/mo + data fees | $249/mo | 10 req/s | + Specs, Recalls, TCO, Payments, APR, Build |
 | **Scale** | $599/mo + data fees | $499/mo | 50 req/s | + Open Recalls, Plate-to-VIN, Taxes & Fees |
 
