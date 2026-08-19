@@ -6,6 +6,10 @@ Converts a US license plate to VIN and basic vehicle info.
 
 **Note:** Highest per-call cost ($0.55). Always warn user before batch operations.
 
+**Privacy:** A plate resolves to a specific vehicle and can identify its owner, and plate
+data is regulated in many US states. Confirm the user has a legitimate purpose before
+calling, and don't run lookups in bulk against plates the user did not supply.
+
 ## Parameters
 
 | Param | Location | Type | Required | Description |
