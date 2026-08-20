@@ -1,7 +1,7 @@
 ---
 name: auto-dev
 description: Use when working with Auto.dev APIs, vehicle data, VIN decoding, car listings, vehicle photos, specs, recalls, payments, interest rates, taxes, OEM build data, plate-to-VIN, CLI commands, MCP tools, or SDK methods for any automotive data task
-version: 1.1.3
+version: 1.1.5
 tags:
   - automotive
   - vehicle-data
@@ -180,6 +180,9 @@ All plans charge per-call data fees on every request. Growth/Scale have no cap o
 - **Large results** (10+ listings): Ask user preference, default to CSV export
 - **Always support**: CSV, JSON export when user requests
 - **Chain APIs** when the query spans multiple endpoints — MCP tools and CLI commands can be called in parallel
+- **Sensitive inputs**: `creditScore`, `zip`, and the price / trade-in / down-payment fields on `/apr`, `/payments`, and `/taxes` are transmitted to the Auto.dev API. Ask the user for these values rather than inferring them, send only what the endpoint requires, and don't persist or echo them beyond the answer.
+- **Plate lookups** (`/plate/{state}/{plate}`) resolve a license plate to a specific vehicle and can identify its owner. Confirm the user has a legitimate purpose, and never run them in bulk against plates the user did not supply.
+- **When writing exports to disk**, confirm the destination path first and don't overwrite an existing file without asking.
 
 ## Deep Reference
 

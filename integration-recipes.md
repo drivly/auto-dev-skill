@@ -182,9 +182,44 @@ import { autodevFetch } from '../lib/autodev';
 
 const router = Router();
 
+// Only these hosts may receive enriched data. Never POST to a URL taken
+// straight from the request body — that turns this route into an SSRF
+// primitive an attacker can point at internal services.
+const CALLBACK_ALLOWED_HOSTS = new Set(
+  (process.env.CALLBACK_ALLOWED_HOSTS ?? '').split(',').filter(Boolean),
+);
+
+const VIN_RE = /^[A-HJ-NPR-Z0-9]{17}$/i;
+
+function safeCallback(raw: string): URL | null {
+  let url: URL;
+  try {
+    url = new URL(raw);
+  } catch {
+    return null;
+  }
+  if (url.protocol !== 'https:') return null;
+  return CALLBACK_ALLOWED_HOSTS.has(url.host) ? url : null;
+}
+
 // Receive a VIN from an external system, enrich it, and forward
 router.post('/enrich-vin', async (req, res) => {
+  // Authenticate the caller — this route spends API credits.
+  if (req.get('x-webhook-secret') !== process.env.WEBHOOK_SECRET) {
+    return res.status(401).json({ error: 'unauthorized' });
+  }
+
   const { vin, callbackUrl } = req.body;
+
+  // Validate before spending anything: the VIN is interpolated into a path.
+  if (!VIN_RE.test(vin ?? '')) {
+    return res.status(400).json({ error: 'invalid vin' });
+  }
+
+  const callback = callbackUrl ? safeCallback(callbackUrl) : null;
+  if (callbackUrl && !callback) {
+    return res.status(400).json({ error: 'callbackUrl host not allowed' });
+  }
 
   try {
     const [decode, specs, recalls] = await Promise.all([
@@ -195,8 +230,8 @@ router.post('/enrich-vin', async (req, res) => {
 
     const enriched = { vin, decode, specs, recalls };
 
-    if (callbackUrl) {
-      await fetch(callbackUrl, {
+    if (callback) {
+      await fetch(callback, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(enriched),
@@ -205,7 +240,9 @@ router.post('/enrich-vin', async (req, res) => {
 
     res.json(enriched);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    // Log detail server-side; don't echo internals to the caller.
+    console.error('enrich-vin failed', error);
+    res.status(500).json({ error: 'enrichment failed' });
   }
 });
 
@@ -229,10 +266,13 @@ function searchAutodev() {
     + `?vehicle.make=${encodeURIComponent(make)}`
     + `&vehicle.model=${encodeURIComponent(model)}`
     + `&retailListing.price=1-${maxPrice}`
-    + `&retailListing.state=${state}`
-    + `&apiKey=${API_KEY}`;
+    + `&retailListing.state=${state}`;
 
-  const response = UrlFetchApp.fetch(url);
+  // V2 accepts a Bearer header — prefer it over `?apiKey=` so the key stays
+  // out of access logs, proxies, and shared URLs.
+  const response = UrlFetchApp.fetch(url, {
+    headers: { Authorization: `Bearer ${API_KEY}` },
+  });
   const data = JSON.parse(response.getContentText());
 
   // Clear previous results
