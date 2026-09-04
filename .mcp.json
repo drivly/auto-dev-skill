@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "auto-dev": {
+      "command": "npx",
+      "args": ["-y", "@auto.dev/sdk", "mcp"]
+    }
+  }
+}
